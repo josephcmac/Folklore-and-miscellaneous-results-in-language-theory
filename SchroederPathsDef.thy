@@ -2,7 +2,7 @@
 Title: Definition of Schroeder Paths
 Author: Jose Manuel Rodriguez Caballero
 
-We define the Schroeder paths as follows:
+We define the Schroeder paths.
 
 
 (This code  was verified in Isabelle2018)
@@ -10,7 +10,7 @@ We define the Schroeder paths as follows:
 
 theory SchroederPathsDef
 
-imports Complex_Main DyckPathsDef
+imports Complex_Main DyckPathsDef 
 
 begin
 
@@ -20,5 +20,6 @@ fun SchroederLetters  :: \<open>int list \<Rightarrow> bool\<close> where
 
 fun SchroederPath :: \<open>int list \<Rightarrow> bool\<close> where
   \<open>SchroederPath w = (NonNegPath w  \<and> SchroederLetters w \<and> (w \<noteq> [] \<longrightarrow> last (HeightList w) = 0))\<close>
+
 
 end
