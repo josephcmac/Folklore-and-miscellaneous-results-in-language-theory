@@ -45,15 +45,15 @@ fun incr :: \<open>int list \<Rightarrow> int \<Rightarrow> int list\<close> whe
   \<open>incr (x#w) c = (x+c)#(incr w c)\<close>
 
 lemma CocatIncr: \<open> incr (v @ w) c = (incr v c) @ (incr w c)\<close> 
-  proof(induction v)
-    case Nil
-    then show ?case 
-      by simp
-  next
-    case (Cons a v)
-    then show ?case 
-      by simp
-  qed
+proof(induction v)
+  case Nil
+  then show ?case 
+    by simp
+next
+  case (Cons a v)
+  then show ?case 
+    by simp
+qed
 
 lemma IteractionIncr: \<open> incr (incr w c) d = incr w (c+d) \<close> 
 proof(induction w)
@@ -104,8 +104,8 @@ lemma ConcatHeightSumU: \<open>w \<noteq> [] \<Longrightarrow> (\<forall> x. las
 
 lemma ConcatHeightSumQRec: 
   assumes \<open> \<forall> w. v \<noteq> [] \<and> w \<noteq> [] \<longrightarrow> last (HeightList v) + last (HeightList w) = last (HeightList (v@w)) \<close> 
- and \<open>w \<noteq> []\<close>
-shows \<open>last (HeightList (x#v)) + last (HeightList w) = last (HeightList ((x#v)@w))\<close>
+    and \<open>w \<noteq> []\<close>
+  shows \<open>last (HeightList (x#v)) + last (HeightList w) = last (HeightList ((x#v)@w))\<close>
 proof(cases \<open>v = []\<close>)
   case True
   then show ?thesis 
@@ -218,14 +218,14 @@ next
   then have \<open>(HeightList v)@( incr (HeightList (u @ [x])) (last (HeightList v)) ) = ( (HeightList v)@( incr (HeightList u) (last (HeightList v)) )  ) @ ( incr (HeightList [x]) (last (HeightList (v@u))) )\<close>
     using ConcatHeightComm 
     by (simp add: False \<open>v \<noteq> []\<close>)
-    then show ?thesis
+  then show ?thesis
     by auto
-  qed
+qed
 
 lemma ConcatHeightQRec:
-assumes  \<open>\<forall> v w. v \<noteq> [] \<and> length w = n \<longrightarrow> HeightList (v@w) = (HeightList v)@( incr (HeightList w) (last (HeightList v)) )\<close>
-and \<open>v \<noteq> []\<close> and \<open>length w = Suc n\<close>
-shows \<open>HeightList (v@w) = (HeightList v)@( incr (HeightList w) (last (HeightList v)) )\<close>  
+  assumes  \<open>\<forall> v w. v \<noteq> [] \<and> length w = n \<longrightarrow> HeightList (v@w) = (HeightList v)@( incr (HeightList w) (last (HeightList v)) )\<close>
+    and \<open>v \<noteq> []\<close> and \<open>length w = Suc n\<close>
+  shows \<open>HeightList (v@w) = (HeightList v)@( incr (HeightList w) (last (HeightList v)) )\<close>  
 proof-
   from  \<open>length w = Suc n\<close> obtain u x where \<open>w = u @ [x]\<close> 
     by (metis append_butlast_last_id length_0_conv nat.simps(3))
@@ -285,15 +285,15 @@ proof-
 qed
 
 lemma NonNegPathincr: \<open>NonNeg w \<Longrightarrow> c \<ge> 0 \<Longrightarrow> NonNeg (incr w c)\<close> 
-  proof(induction w)
-    case Nil
-    then show ?case 
-      by simp
-  next
-    case (Cons a w)
-    then show ?case 
-      by (smt NonNeg.simps(2) incr.simps(2))
-  qed
+proof(induction w)
+  case Nil
+  then show ?case 
+    by simp
+next
+  case (Cons a w)
+  then show ?case 
+    by (smt NonNeg.simps(2) incr.simps(2))
+qed
 
 lemma ConcatNonNeg: \<open>NonNeg v \<Longrightarrow> NonNeg w \<Longrightarrow> NonNeg (v@w)\<close> 
 proof(induction v)
